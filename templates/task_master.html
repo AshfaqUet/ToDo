@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block body%}
+<div class="jumbotron text-center">
+    <h1>Todo Task Master</h1>
+  </div>
+<div class="container col-md-8">
+    <table class="table table-striped">
+    <thead>
+      <tr>
+            <th>Task</th>
+          <th>Priority</th>
+            <th>Added on</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for task in tasks %}
+        <tr>
+            <td>{{task.content}}</td>
+            <td>{{task.priority}}</td>
+            <td>{{task.date_created.date()}}</td>
+            <td>
+                <a href="/delete_task/{{task.id}}" class="btn btn-danger">Completed</a>
+                <a href="/update_task/{{task.id}}" class="btn btn-success">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="container col-md-8">
+    <br><br>
+    <hr>
+    <div class="jumbotron text-center">
+    <h1>Add New Task</h1>
+  </div>
+<form action="/add_todo_task" method="post">
+    <table class="form text-center">
+        <tr>
+            <td>
+                <input type="text"class="form-control" placeholder="Add New Todo Task here" name = 'content'>
+            </td>
+            <td>
+                <input type="number"class="form-control" placeholder="Priority" name = 'priority'>
+            </td>
+            <td>
+                <input type="submit" class = "btn btn-success"placeholder="Add Task" value = 'Add Task'>
+            </td>
+        </tr>
+    </table>
+</form>
+    <br><br><br>
+<a class="btn btn-primary" href = "/">Back</a>
+</div>
+{% endblock %}
